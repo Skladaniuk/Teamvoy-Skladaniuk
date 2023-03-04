@@ -1,0 +1,12 @@
+.pokemon{
+    
+    width: 150px;
+    height: 200px;
+    background-color: aqua;
+    margin-right: 15px;
+    margin-top: 15px;
+    
+}
+/* .pokemon:nth-child(3n){
+    margin-right: 0px;
+} */
