@@ -5,6 +5,8 @@ import { PokemonInfo } from 'components/PokemonInfo/PokemonInfo';
 import axios from 'axios';
 import { ButtonLoadMore } from 'components/ButtonLoadMore/ButtonLoadMore';
 import { FilterBar } from 'components/FilterBar/FilterBar';
+import { Title } from 'components/Title/Title';
+import { nanoid } from 'nanoid';
 export const MainView = () => {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,16 +19,15 @@ export const MainView = () => {
   useEffect(() => {
     pokeFun();
   }, [offset]);
-  
+
   const pokeFun = async () => {
     setLoading(true);
+
     const url = creatLink(limit, offset);
-    console.log(url)
     const res = await axios(url);
 
     getPokemon(res.data.results);
-
-    setLoading(false);
+   setLoading(false);
   };
 
   const getPokemon = async res => {
@@ -45,36 +46,48 @@ export const MainView = () => {
   };
 
   const changeFilter = event => {
-    setFilter(event.currentTarget.value);
+    setFilter(event.target.value);
   };
 
   const getVisiblePokemons = () => {
     const normalizedFilter = filter.toLowerCase();
-    return pokeData.filter(({ type }) =>
-      type.toLowerCase().includes(normalizedFilter)
-    );
+    const filteredPokemons = pokeData.filter(pokemon => {
+      for (const iterator of pokemon.types) {
+        if (iterator.type.name.toLowerCase() === normalizedFilter) {
+          return true;
+        } else {
+          continue;
+        }
+      }
+    });
+    return filteredPokemons.length > 0 ? filteredPokemons : pokeData;
   };
 
   const creatLink = (limit, offset) => {
     return `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   };
 
+
+
   return (
     <>
-      <FilterBar />
       <div className={css.container}>
-        <div className={css.leftContent}>
-          <Pokemon
-            pokemon={pokeData}
-            loading={loading}
-            infoPokemon={pok => setCurrentPok(pok)}
-          />
-        </div>
-        <div className={css.rightContent}>
-          <PokemonInfo data={currentPok} />
+        <Title />
+        <FilterBar value={filter} onChange={changeFilter} />
+        <div className={css.sectionWrapper}>
+          <div className={css.leftContent}>
+            <Pokemon
+              pokemon={getVisiblePokemons()}
+              loading={loading}
+              infoPokemon={pok => setCurrentPok(pok)}
+            />
+            <ButtonLoadMore loadMore={loadMore} />
+          </div>
+          <div className={css.rightContent}>
+            <PokemonInfo data={currentPok} />
+          </div>
         </div>
       </div>
-      <ButtonLoadMore loadMore={loadMore} />
     </>
   );
 };

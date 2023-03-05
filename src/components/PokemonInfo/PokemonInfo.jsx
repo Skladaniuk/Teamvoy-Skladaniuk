@@ -1,62 +1,79 @@
 import css from './PokemonInfo.module.css';
-
+import { nanoid } from 'nanoid';
 export const PokemonInfo = ({ data }) => {
-  console.log(data);
 
   return (
-    <>
+    <div>
       {!data ? (
         ''
       ) : (
         <>
-          <div>
-            <img
-              src={data.sprites.other.dream_world.front_default}
-              alt={data.name}
-            />
+          <div className={css.pokemon}>
             <div>
-                <h2>{data.name}</h2>
-                <p>{`#00${data.id}` }</p>
+              <img
+                className={css.pokemon__img}
+                src={data.sprites.other.dream_world.front_default}
+                alt={data.name}
+              />
+
+              <div>
+                <h2 className={css.pokemon__title}>
+                  {data.name}
+                  <span>{`#00${data.id}`}</span>
+                </h2>
+              </div>
             </div>
-          </div>
-          <div className="">
-            <table border="1" className={css.table}>
-              <tbody>
-                <tr>
-                  <td>Type</td>
-                  <td>
-                    {data.types.map(item => {
-                      return <p>{item.type.name}</p>;
-                    })}
-                  </td>
-                </tr>
-                {data.stats
-                  .sort((prev, curr) => {
-                    return prev.stat.name.localeCompare(curr.stat.name);
-                  })
-                  .map(item => {
-                    return (
-                      <>
-                        <tr>
-                          <td>{item.stat.name}</td>
-                          <td>{item.base_stat}</td>
+            <div>
+              <table
+                border="1"
+                width="100%"
+                cellSpacing="0"
+                cellPadding="5"
+                className={css.table}
+              >
+                <tbody>
+                  <tr>
+                    <td>Type</td>
+                    <td>
+                      {data.types.map(item => {
+                        return (
+                          <p key={nanoid()}>
+                            {item.type.name.charAt(0).toUpperCase() +
+                              item.type.name.slice(1)}
+                          </p>
+                        );
+                      })}
+                    </td>
+                  </tr>
+                  {data.stats
+                    .sort((prev, curr) => {
+                      return prev.stat.name.localeCompare(curr.stat.name);
+                    })
+                    .map(item => {
+                      return (
+                        <tr key={nanoid()}>
+                          <td>
+                            {item.stat.name.charAt(0).toUpperCase() +
+                              item.stat.name.slice(1)}
+                          </td>
+                          <td> {item.base_stat}</td>
                         </tr>
-                      </>
-                    );
-                  })}
-                <tr>
-                  <td>weight</td>
-                  <td>{data.weight}</td>
-                </tr>
-                <tr>
-                  <td>Total moves</td>
-                  <td>{data.moves.length}</td>
-                </tr>
-              </tbody>
-            </table>
+                      );
+                    })}
+                  <tr>
+                    <td>Weight</td>
+                    <td>{data.weight}</td>
+                  </tr>
+                  <tr>
+                    <td>Total moves</td>
+                    <td>{data.moves.length}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };

@@ -1,7 +1,11 @@
 button{
-    margin-top: 80px;
-width: 300px;
-background-color: red;
+width: 450px;
+height: 40px;
+border-radius: 5px;
+font-size: 20px;
+color: white;
+background-color: #187ecc;
+border: #187ecc;
 }
 
 

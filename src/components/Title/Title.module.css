@@ -1,0 +1,14 @@
+.title__border {
+    width: 50%;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    
+}
+h2{
+    text-align: center;
+    
+}
