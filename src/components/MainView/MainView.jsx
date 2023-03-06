@@ -59,6 +59,7 @@ export const MainView = () => {
           continue;
         }
       }
+      return false
     });
     return filteredPokemons.length > 0 ? filteredPokemons : pokeData;
   };
