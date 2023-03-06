@@ -6,11 +6,10 @@ import axios from 'axios';
 import { ButtonLoadMore } from 'components/ButtonLoadMore/ButtonLoadMore';
 import { FilterBar } from 'components/FilterBar/FilterBar';
 import { Title } from 'components/Title/Title';
-import { nanoid } from 'nanoid';
+
 export const MainView = () => {
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
   const [offset, setOffSet] = useState(0);
   const [currentPok, setCurrentPok] = useState();
   const [filter, setFilter] = useState('');
