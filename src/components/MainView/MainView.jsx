@@ -17,6 +17,7 @@ export const MainView = () => {
  
   useEffect(() => {
     pokeFun();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
   const pokeFun = async () => {
