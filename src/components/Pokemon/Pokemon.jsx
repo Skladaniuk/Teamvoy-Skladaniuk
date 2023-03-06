@@ -15,7 +15,7 @@ export const Pokemon = ({ pokemon, infoPokemon }) => {
             onClick={() => infoPokemon(item)}
           >
             <div className={css.pokemon__img}>
-              <img src={item.sprites.front_default} width="100%" />
+              <img src={item.sprites.front_default} width="100%" alt={pokemon.name} />
             </div>
             <p className={css.pokemon__name}>
               {item.name.charAt(0).toUpperCase() + item.name.slice(1)}{' '}
