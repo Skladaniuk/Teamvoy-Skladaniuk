@@ -1,6 +1,10 @@
 import css from './Pokemon.module.css';
 import { nanoid } from 'nanoid';
-export const Pokemon = ({ pokemon, loading, infoPokemon }) => {
+import colors from 'const';
+export const Pokemon = ({ pokemon, infoPokemon }) => {
+
+
+
   return (
     <>
       {pokemon.map(item => {
@@ -13,12 +17,22 @@ export const Pokemon = ({ pokemon, loading, infoPokemon }) => {
             <div className={css.pokemon__img}>
               <img src={item.sprites.front_default} width="100%" />
             </div>
-            <p className={css.pokemon__name}>{item.name} </p>
+            <p className={css.pokemon__name}>
+              {item.name.charAt(0).toUpperCase() + item.name.slice(1)}{' '}
+            </p>
             <ul className={css.pokemon__types}>
               {item.types.map(item => {
+                const typeColor = colors[item.type.name];
+            
                 return (
                   <div key={nanoid()} className={css.pokemon__wrapper}>
-                    <li className={css.pokemon__type}>{item.type.name}</li>
+                    <li
+                      style={{ backgroundColor: typeColor }}
+                      className={css.pokemon__type}
+                    >
+                      {item.type.name.charAt(0).toUpperCase() +
+                        item.type.name.slice(1)}
+                    </li>
                   </div>
                 );
               })}

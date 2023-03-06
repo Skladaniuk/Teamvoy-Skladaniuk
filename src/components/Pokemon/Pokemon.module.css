@@ -16,6 +16,7 @@
     
 }
 .pokemon__name{
+  
     font-size: 15px;
     text-align: center;
     font-weight: bold;
@@ -25,13 +26,13 @@
         width: 80px;
         display: flex;
         
+        
     }
 .pokemon__type{
     margin-right: 15px;
-    border: 1px solid #4d4040;
-    background-color: #4d4040;
     border-radius: 5px;
-    color: aliceblue;
+    color: black;
     font-size: 12px;
+    font-weight: bold;
     padding: 5px;
 }

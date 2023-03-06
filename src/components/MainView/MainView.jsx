@@ -15,7 +15,7 @@ export const MainView = () => {
   const [currentPok, setCurrentPok] = useState();
   const [filter, setFilter] = useState('');
   const limit = 12;
-
+ 
   useEffect(() => {
     pokeFun();
   }, [offset]);
@@ -71,23 +71,25 @@ export const MainView = () => {
 
   return (
     <>
-      <div className={css.container}>
-        <Title />
-        <FilterBar value={filter} onChange={changeFilter} />
-        <div className={css.sectionWrapper}>
-          <div className={css.leftContent}>
-            <Pokemon
-              pokemon={getVisiblePokemons()}
-              loading={loading}
-              infoPokemon={pok => setCurrentPok(pok)}
-            />
-            <ButtonLoadMore loadMore={loadMore} />
-          </div>
-          <div className={css.rightContent}>
-            <PokemonInfo data={currentPok} />
+     
+        <div className={css.container}>
+          <Title />
+          <FilterBar value={filter} onChange={changeFilter} />
+          <div className={css.sectionWrapper}>
+            <div className={css.leftContent}>
+              <Pokemon
+                pokemon={getVisiblePokemons()}
+                loading={loading}
+                infoPokemon={pok => setCurrentPok(pok)}
+              />
+              <ButtonLoadMore loadMore={loadMore} />
+            </div>
+            <div className={css.rightContent}>
+              <PokemonInfo data={currentPok} />
+            </div>
           </div>
         </div>
-      </div>
+     
     </>
   );
 };
